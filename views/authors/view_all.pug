@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+    h3 Authors
+    table
+        thead
+            tr
+                th Author
+                th Date of Birth
+        tbody
+            each author in authors
+                tr
+                    td #{author.first} #{author.last}
+                    td= author.dob
