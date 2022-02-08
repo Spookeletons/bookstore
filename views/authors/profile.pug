@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+    h3 #{author.first} #{author.last}
+    a(href=`/authors/edit/${author.id}`) Edit Author
+    a(href=`/authors/delete/${author.id}`) Delete Author
+    a(href='/authors') Back to Authors
+    div
+        p DOB: #{author.dob}

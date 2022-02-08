@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+    h3 #{book.first} #{book.last}
+    a(href=`/books/edit/${book.id}`) Edit Book
+    a(href=`/books/delete/${book.id}`) Delete Book
+    a(href='/books') Back to Books
+    div
+        p DOB: #{book.dob}
