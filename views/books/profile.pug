@@ -1,9 +1,15 @@
 extends ../layout
 
 block content
-    h3 #{book.first} #{book.last}
+    h3 #{book.title}
     a(href=`/books/edit/${book.id}`) Edit Book
     a(href=`/books/delete/${book.id}`) Delete Book
     a(href='/books') Back to Books
     div
-        p DOB: #{book.dob}
+        p Genre: #{book.genre}
+        p Page count: #{book.pages}
+        p Publisher: #{book.publisher}
+        div
+            p Image:
+            img.image(src=book.image)
+        p Description: #{book.description}

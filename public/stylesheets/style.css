@@ -6,3 +6,14 @@ body {
 a {
   color: #00B7FF;
 }
+
+.image {
+  width:100px;
+  height:100px;
+}
+tr {
+  height: 200px;
+}
+th, td {
+  flex: 1;
+}
