@@ -1,4 +1,4 @@
-const {Book, Author} = require('../models')
+const {Book, Author, genre} = require('../models')
 
 //view all
 module.exports.viewAll = async function(req, res){
@@ -8,7 +8,9 @@ module.exports.viewAll = async function(req, res){
 
 //profile
 module.exports.viewProfile = async function(req,res){
-    const book = await Book.findByPk(req.params.id);
+    const book = await Book.findByPk(req.params.id, {
+        include: 'authors'
+    });
     res.render('books/profile', {book})
 }
 
