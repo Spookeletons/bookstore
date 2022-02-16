@@ -11,6 +11,13 @@ module.exports.viewProfile = async function(req,res){
     const author = await Author.findByPk(req.params.id, {
         include: 'books'
     });
+    const books = await Book.findAll();
+    let availableBooks = [];
+    for(let i=0;i<books.length;i++){
+        if(!authorHasBook(author,books[i])){
+            availableBooks.push(books[i]);
+        }
+    }
     res.render('authors/profile', {author})
 }
 
@@ -62,4 +69,21 @@ module.exports.deleteAuthor = async function(req,res){
         }
     });
     res.redirect('/authors');
+}
+function authorHasBook(author, book){
+    for(let i=0;i<author.books.length;i++){
+        if(author.id === author.books[i].id){
+            return true
+        }
+    }
+    return false
+}
+
+//Add book to author
+module.exports.addBookToAuthor = async function(req,res){
+    await BookAuthors.create({
+        author_id:req.params.author_id,
+        book_id:req.body.book_id
+    })
+    res.redirect(`/authors/profile/${req.params.author_id}`);
 }
