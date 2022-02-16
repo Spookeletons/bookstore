@@ -1,4 +1,4 @@
-const {Book, Author, genre} = require('../models')
+const {Book, Author, BookAuthors, genre} = require('../models')
 
 //view all
 module.exports.viewAll = async function(req, res){
@@ -71,4 +71,15 @@ module.exports.deleteBook = async function(req,res){
         }
     });
     res.redirect('/books');
+}
+
+//delete book from an author
+module.exports.removeBook = async function(req,res){
+    await BookAuthors.destroy({
+        where: {
+            book_id: req.params.book_id,
+            author_id: req.params.author_id
+        }
+    });
+    res.redirect(`/books/profile/${req.params.book_id}`)
 }

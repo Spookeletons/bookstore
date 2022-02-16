@@ -25,5 +25,5 @@ router.post('/books/add', bookController.addBook);
 router.get('/books/delete/:id', bookController.deleteBook);
 
 router.post('/authors/:author_id/add/', authorController.addBookToAuthor);
-router.get('/authors/:author_id/remove/:book_id', authorController.removeBook);
+router.get('/books/:book_id/removeAuthor/:author_id', bookController.removeBook);
 module.exports = router;
