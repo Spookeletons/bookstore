@@ -7,3 +7,32 @@ block content
     a(href='/authors') Back to Authors
     div
         p DOB: #{author.dob}
+    div.books
+        h4 Books by the Author
+        form(action=`/authors/${author.id}/add/` method='post')
+            select(name='book' id='book' autocomplete=off)
+                each book in availableBooks
+                    option(value=book.id) #{book.title}
+            button.button(type='submit') Add
+        table
+            thead
+                tr
+                    th Title
+                    th Genre
+                    th Page Count
+                    th Publisher
+                    th Image
+                    th Description
+                    th
+            tbody
+                each book in author.books
+                    tr
+                        td= book.title
+                        td= book.genre
+                        td= book.pages
+                        td= book.publisher
+                        td= book.image
+                        td= book.description
+                        td
+                            a(href=`/books/profile/${book.id}`) View Book
+                            a(href=`/books/${book.id}/remove/:${author.id}`) Remove Book
