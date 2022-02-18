@@ -13,19 +13,27 @@ block content
             p Image:
             img.image(src=book.image)
         p Description: #{book.description}
-    h4 Author(s) who wrote the book
-    table
-        thead
-            tr
-                th First Name
-                th Last Name
-                th Date of Birth
-                th
-        tbody
-            each author in book.author
+    div.authors
+        h4 Author(s) not credited
+        form(action=`/books/${author.id}/enroll` method='post')
+            select(name='author' id='author' autocomplete=off)
+                each author in availableAuthors
+                    option(value= author.id) #{author.first}
+            button.button(type='submit') Add Author
+
+        h4 Authors credited
+        table
+            thead
                 tr
-                    td= author.first
-                    td= author.last
-                    td= author.dob
-                    td
-                        a(href=`/authors/profile/${author.id}`) View Author
+                    th First Name
+                    th Last Name
+                    th Date of Birth
+                    th
+            tbody
+                each author in book.author
+                    tr
+                        td= author.first
+                        td= author.last
+                        td= author.dob
+                        td
+                            a(href=`/authors/profile/${author.id}`) View Author

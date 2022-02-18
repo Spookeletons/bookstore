@@ -11,6 +11,13 @@ module.exports.viewProfile = async function(req,res){
     const book = await Book.findByPk(req.params.id, {
         include: 'authors'
     });
+    const authors = await Author.findAll();
+    let availableAuthors = [];
+    for(let i=0;i<authors.length;i++){
+        if(!bookHasAuthor(book,authors[i])){
+            availableStudents.push(students[i])
+        }
+    }
     res.render('books/profile', {book})
 }
 
@@ -80,6 +87,21 @@ module.exports.removeBook = async function(req,res){
             book_id: req.params.book_id,
             author_id: req.params.author_id
         }
+    });
+    res.redirect(`/books/profile/${req.params.book_id}`)
+}
+function bookHasAuthor(book, author){
+    for(let i=0; i<book.authors.length; i++){
+        if(author.id === book.authors[i].id){
+            return true
+        }
+    }
+    return false
+}
+module.exports.addAuthor = async function(req, res){
+    await BookAuthors.create( {
+        author_id: req.body.author,
+        book_id: req.body.book_id
     });
     res.redirect(`/books/profile/${req.params.book_id}`)
 }
