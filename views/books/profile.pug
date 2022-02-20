@@ -15,25 +15,31 @@ block content
         p Description: #{book.description}
     div.authors
         h4 Author(s) not credited
-        form(action=`/books/${author.id}/enroll` method='post')
-            select(name='author' id='author' autocomplete=off)
-                each author in availableAuthors
-                    option(value= author.id) #{author.first}
-            button.button(type='submit') Add Author
-
+        if availableAuthors.length>0
+            form(action=`/books/${author.id}/enroll` method='post')
+                select(name='author' id='author' autocomplete=off)
+                    each author in availableAuthors
+                        option(value= author.id) #{author.first}
+                button.button(type='submit') Add Author
+        else
+            p No remaining authors are eligible
         h4 Authors credited
-        table
-            thead
-                tr
-                    th First Name
-                    th Last Name
-                    th Date of Birth
-                    th
-            tbody
-                each author in book.author
+        if book.authors.length>0
+            table
+                thead
                     tr
-                        td= author.first
-                        td= author.last
-                        td= author.dob
-                        td
-                            a(href=`/authors/profile/${author.id}`) View Author
+                        th First Name
+                        th Last Name
+                        th Date of Birth
+                        th
+                tbody
+                    each author in book.author
+                        tr
+                            td= author.first
+                            td= author.last
+                            td= author.dob
+                            td
+                                a(href=`/authors/profile/${author.id}`) View Author
+                                a(href=`/books/${book.id}/removeAuthor/${author_id}`) Remove Author
+        else
+            p No authors are credited with this book

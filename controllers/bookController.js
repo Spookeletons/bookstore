@@ -80,16 +80,6 @@ module.exports.deleteBook = async function(req,res){
     res.redirect('/books');
 }
 
-//delete book from an author
-module.exports.removeBook = async function(req,res){
-    await BookAuthors.destroy({
-        where: {
-            book_id: req.params.book_id,
-            author_id: req.params.author_id
-        }
-    });
-    res.redirect(`/books/profile/${req.params.book_id}`)
-}
 function bookHasAuthor(book, author){
     for(let i=0; i<book.authors.length; i++){
         if(author.id === book.authors[i].id){
@@ -98,10 +88,19 @@ function bookHasAuthor(book, author){
     }
     return false
 }
-module.exports.addAuthor = async function(req, res){
+module.exports.addAuthorToBook = async function(req, res){
     await BookAuthors.create( {
         author_id: req.body.author,
         book_id: req.body.book_id
     });
     res.redirect(`/books/profile/${req.params.book_id}`)
+}
+module.exports.removeAuthor = async function(req,res){
+    await BookAuthors.destroy({
+        where: {
+            book_id: req.params.book_id,
+            author_id: req.params.author_id
+        }
+    });
+    res.redirect(`/books/profile/${req.params.book_id}`);
 }
