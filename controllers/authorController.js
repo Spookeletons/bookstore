@@ -38,7 +38,7 @@ module.exports.addAuthor = async function(req,res){
         last: req.body.last,
         dob: req.body.dob
     });
-    res.redirect(`/authors/profile/${author.id}`);
+    res.redirect(`/authors`);
 }
 
 //render edit form
@@ -58,7 +58,7 @@ module.exports.updateAuthor = async function(req,res){
             id: req.params.id
         }
         });
-    res.redirect(`/authors/profile/${req.params.id}`);
+    res.redirect(`/authors`);
 }
 
 //delete

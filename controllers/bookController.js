@@ -1,4 +1,4 @@
-const {Book, Author, BookAuthors, genre} = require('../models')
+const {Book, Author, BookAuthors} = require('../models')
 
 //view all
 module.exports.viewAll = async function(req, res){
@@ -25,13 +25,13 @@ module.exports.viewProfile = async function(req,res){
 module.exports.renderAddForm = async function(req,res){
     const book = {
         title: '',
-        genre: genres[0],
+        genre: '',
         pages: '',
         publisher: '',
         image: '',
         description: '',
     }
-    res.render('books/add', {book, genre});
+    res.render('books/add', {book});
 }
 
 //add
@@ -50,7 +50,7 @@ module.exports.addBook = async function(req,res){
 //render edit form
 module.exports.renderEditForm = async function(req,res){
     const book = await Book.findByPk(req.params.id);
-    res.render('books/edit', {book, genre});
+    res.render('books/edit', {book});
 }
 
 //update
