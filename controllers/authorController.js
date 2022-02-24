@@ -18,7 +18,7 @@ module.exports.viewProfile = async function(req,res){
             availableBooks.push(books[i]);
         }
     }
-    res.render('authors/profile', {author})
+    res.render('authors/profile', {author, availableBooks})
 }
 
 //render add form

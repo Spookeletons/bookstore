@@ -12,6 +12,7 @@ block content
                 th Publisher
                 th Image
                 th Description
+                th
         tbody
             each book in books
                 tr
@@ -22,3 +23,5 @@ block content
                     td
                         img.image(src= book.image)
                     td= book.description
+                    td
+                        a(href=`/books/profile/${book.id}`) View Book

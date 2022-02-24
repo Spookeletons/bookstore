@@ -15,10 +15,10 @@ module.exports.viewProfile = async function(req,res){
     let availableAuthors = [];
     for(let i=0;i<authors.length;i++){
         if(!bookHasAuthor(book,authors[i])){
-            availableStudents.push(students[i])
+            availableAuthors.push(authors[i])
         }
     }
-    res.render('books/profile', {book})
+    res.render('books/profile', {book, availableAuthors})
 }
 
 //render add form
