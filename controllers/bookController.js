@@ -30,7 +30,7 @@ module.exports.renderAddForm = async function(req,res){
         publisher: '',
         image: '',
         description: '',
-    }
+    };
     res.render('books/add', {book});
 }
 

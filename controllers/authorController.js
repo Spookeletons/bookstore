@@ -27,7 +27,7 @@ module.exports.renderAddForm = async function(req,res){
         first: '',
         last: '',
         dob: ''
-    }
+    };
     res.render('authors/add', {author});
 }
 
